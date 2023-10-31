@@ -1,0 +1,50 @@
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  gap: 20px;
+}
+
+.gallery > img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid ;
+  border-radius: 30px;
+}
+
+.gallery-item {
+  position: relative;
+}
+
+.select-checkbox {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.select-block{
+  display: block;
+  position: absolute ;
+  top: 5px;
+  left: 5px;
+}
+
+.gallery-item:hover .select-checkbox {
+  display: block;
+}
+
+
+
+.img-item{
+  border: 1px solid #b1afaf;
+  border-radius: 8px;
+}
+
+
+.item:nth-child(1) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
