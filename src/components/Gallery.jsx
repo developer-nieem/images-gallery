@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import GalleryItem from "./GalleryItem";
 
 // Import dnd file
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import {
+  arrayMove,
   SortableContext,
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
-import { SortableItem } from "./SortableItem";
+
+
+import { SortableItem } from "./SortableGalleryItem";
 
 const Gallery = () => {
 
@@ -27,14 +29,25 @@ const Gallery = () => {
   ]);
 
   // For Checkbox
+  const [selectedItems, setSelectedItems] = useState(new Set());
+
+  // Function to handle checkbox changes
   const handleCheckboxChange = (itemId) => {
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === itemId ? { ...item, selected: !item.selected } : item
       )
     );
-
-    console.log('checkbox');
+    
+    setSelectedItems((prevSelectedItems) => {
+      const updatedSelectedItems = new Set(prevSelectedItems);
+      if (updatedSelectedItems.has(itemId)) {
+        updatedSelectedItems.delete(itemId);
+      } else {
+        updatedSelectedItems.add(itemId);
+      }
+      return updatedSelectedItems;
+    });
   };
 
   // For delete image function 
@@ -43,17 +56,28 @@ const Gallery = () => {
   };
 
 
+  // Set how many items select 
   const selectedCount = items.filter((item) => item.selected).length;
 
+
+  // For DND Function
   const onDragEnd = (event) => {
-    console.log("onDragEnd", event);
+    const { active, over } = event;
+    if (active.id === over.id) {
+      return;
+    }
+    setItems((items) => {
+      const oldIndex = items.findIndex((user) => user.id === active.id);
+      const newIndex = items.findIndex((user) => user.id === over.id);
+      return arrayMove(items, oldIndex, newIndex);
+    });
   };
 
 
   return (
     <div>
       <div className="card">
-        <div className="card-header">Featured</div>
+        <div className="card-header">{selectedCount}</div>
         <div className="gallery ">
           <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext
@@ -64,9 +88,9 @@ const Gallery = () => {
               {items.map((item) => (
                 <div key={item.id} className="item border-1 ">
                   <SortableItem
-                    key={item.id}
+                   
                     src={item.src}
-                    selected={item.selected}
+                    selected={selectedItems.has(item.id)}
                     onToggle={() => handleCheckboxChange(item.id)}
                     item={item}
                   >
