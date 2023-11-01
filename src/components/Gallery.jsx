@@ -24,8 +24,6 @@ const Gallery = () => {
     { id: 11, src: "image-11.jpeg", selected: false },
   ]);
 
-  // For Checkbox
-  const [selectedItems, setSelectedItems] = useState(new Set());
 
   // Function to handle checkbox changes
   const handleCheckboxChange = (itemId) => {
@@ -34,16 +32,6 @@ const Gallery = () => {
         item.id === itemId ? { ...item, selected: !item.selected } : item
       )
     );
-
-    setSelectedItems((prevSelectedItems) => {
-      const updatedSelectedItems = new Set(prevSelectedItems);
-      if (updatedSelectedItems.has(itemId)) {
-        updatedSelectedItems.delete(itemId);
-      } else {
-        updatedSelectedItems.add(itemId);
-      }
-      return updatedSelectedItems;
-    });
   };
 
   // For delete image function
@@ -99,7 +87,7 @@ const Gallery = () => {
                 <div key={item.id} className="item border-1 ">
                   <SortableItem
                     src={item.src}
-                    selected={selectedItems.has(item.id)}
+                    selected={item.selected}
                     onToggle={() => handleCheckboxChange(item.id)}
                     item={item}
                   >
