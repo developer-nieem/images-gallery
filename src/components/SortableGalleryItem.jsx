@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 
-export function SortableItem({ src, selected, onToggle, item }) {
+export function SortableItem({ src, selected, onClick, item }) {
     
  
     const { attributes, listeners, setNodeRef, transform, transition } =
@@ -14,16 +14,9 @@ export function SortableItem({ src, selected, onToggle, item }) {
   };
 
 
-  const handleDivClick = () => {
-    
-    onToggle()
-    console.log(selected);
-  };
-
-  
 
   return (
-    <div onMouseDown={handleDivClick} >
+    <div  onMouseDown={onClick}>
       <div className= {`gallery-item m-3 ${selected ? "select-gallery-item" : ""}` }  ref={setNodeRef} style={style} {...attributes} {...listeners} >
         <img src={src} alt="Gallery Item" className="img-fluid img-item" />
         <input

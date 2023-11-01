@@ -34,6 +34,7 @@ const Gallery = () => {
     );
   };
 
+
   // For delete image function
 
   const handleDeleteSelected = () => {
@@ -88,7 +89,7 @@ const Gallery = () => {
                   <SortableItem
                     src={item.src}
                     selected={item.selected}
-                    onToggle={() => handleCheckboxChange(item.id)}
+                    onClick={() => handleCheckboxChange(item.id)}
                     item={item}
                   >
                     {" "}
