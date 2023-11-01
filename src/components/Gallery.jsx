@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { SortableItem } from "./SortableGalleryItem";
 
 // Import dnd file
 import { DndContext, closestCenter } from "@dnd-kit/core";
@@ -9,11 +10,8 @@ import {
 } from "@dnd-kit/sortable";
 
 
-import { SortableItem } from "./SortableGalleryItem";
 
 const Gallery = () => {
-
-
   const [items, setItems] = useState([
     { id: 1, src: "image-1.webp", selected: false },
     { id: 2, src: "image-2.webp", selected: false },
@@ -31,6 +29,8 @@ const Gallery = () => {
   // For Checkbox
   const [selectedItems, setSelectedItems] = useState(new Set());
 
+
+  
   // Function to handle checkbox changes
   const handleCheckboxChange = (itemId) => {
     setItems((prevItems) =>
@@ -50,7 +50,11 @@ const Gallery = () => {
     });
   };
 
+
+
+
   // For delete image function 
+
   const handleDeleteSelected = () => {
     setItems((prevItems) => prevItems.filter((item) => !item.selected));
   };
