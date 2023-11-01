@@ -19,7 +19,7 @@
   position: relative;
 }
 
-
+/* Image hover style */
 .gallery-item::before {
   content: "";
   position: absolute;
@@ -38,6 +38,23 @@
   opacity: 1;
 }
 
+/* After images select style */
+.select-gallery-item::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.219); 
+  border-radius: 8px;
+  opacity: 0.5; 
+  z-index: 1; 
+}
+
+
+
+
 .img-item{
   border: 1px solid #b1afaf;
   border-radius: 8px;
@@ -50,11 +67,16 @@
 }
 
 
+/* Checkbox  */
 .select-checkbox {
   display: none;
   position: absolute;
   top: 5px;
   left: 5px;
+  width: 15px; 
+  height: 15px;
+  z-index: 20;
+  
   
 }
 .select-block{
@@ -62,6 +84,10 @@
   position: absolute ;
   top: 5px;
   left: 5px;
+  width: 15px; 
+  height: 15px;
+  z-index: 20;
+ 
 }
 
 

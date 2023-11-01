@@ -24,11 +24,11 @@ export function SortableItem({ src, selected, onToggle, item }) {
 
   return (
     <div  onMouseDown={handleDivClick}>
-      <div className="gallery-item m-3"  ref={setNodeRef} style={style} {...attributes} {...listeners} >
+      <div className= {`gallery-item m-3 ${selected ? "select-gallery-item" : ""}` }  ref={setNodeRef} style={style} {...attributes} {...listeners} >
         <img src={src} alt="Gallery Item" className="img-fluid img-item" />
         <input
           type="checkbox"
-          className={`select-checkbox ${selected ? "select-block" : ""}`}
+          className={`select-checkbox ${selected ? "select-block select-gallery-item" : ""}`}
           checked={selected}
           
         />
