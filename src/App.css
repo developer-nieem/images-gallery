@@ -12,31 +12,31 @@
   width: 100%;
   object-fit: cover;
   border: 1px solid ;
-  border-radius: 30px;
+  
 }
 
 .gallery-item {
   position: relative;
 }
 
-.select-checkbox {
-  display: none;
+
+.gallery-item::before {
+  content: "";
   position: absolute;
-  top: 5px;
-  left: 5px;
-}
-.select-block{
-  display: block;
-  position: absolute ;
-  top: 5px;
-  left: 5px;
-}
-
-.gallery-item:hover .select-checkbox {
-  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.219); 
+  border-radius: 8px;
+  opacity: 0; 
+  transition: opacity 0.3s; 
+  z-index: 1; 
 }
 
-
+.gallery-item:hover::before {
+  opacity: 1;
+}
 
 .img-item{
   border: 1px solid #b1afaf;
@@ -47,4 +47,28 @@
 .item:nth-child(1) {
   grid-column: span 2;
   grid-row: span 2;
+}
+
+
+.select-checkbox {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  
+}
+.select-block{
+  display: block;
+  position: absolute ;
+  top: 5px;
+  left: 5px;
+}
+
+
+
+
+.gallery-item:hover .select-checkbox {
+  display: block;
+
+
 }

@@ -9,8 +9,6 @@ import {
   rectSortingStrategy,
 } from "@dnd-kit/sortable";
 
-
-
 const Gallery = () => {
   const [items, setItems] = useState([
     { id: 1, src: "image-1.webp", selected: false },
@@ -29,8 +27,6 @@ const Gallery = () => {
   // For Checkbox
   const [selectedItems, setSelectedItems] = useState(new Set());
 
-
-  
   // Function to handle checkbox changes
   const handleCheckboxChange = (itemId) => {
     setItems((prevItems) =>
@@ -38,7 +34,7 @@ const Gallery = () => {
         item.id === itemId ? { ...item, selected: !item.selected } : item
       )
     );
-    
+
     setSelectedItems((prevSelectedItems) => {
       const updatedSelectedItems = new Set(prevSelectedItems);
       if (updatedSelectedItems.has(itemId)) {
@@ -50,19 +46,14 @@ const Gallery = () => {
     });
   };
 
-
-
-
-  // For delete image function 
+  // For delete image function
 
   const handleDeleteSelected = () => {
     setItems((prevItems) => prevItems.filter((item) => !item.selected));
   };
 
-
-  // Set how many items select 
+  // Set how many items select
   const selectedCount = items.filter((item) => item.selected).length;
-
 
   // For DND Function
   const onDragEnd = (event) => {
@@ -77,11 +68,26 @@ const Gallery = () => {
     });
   };
 
-
   return (
     <div>
       <div className="card">
-        <div className="card-header">{selectedCount}</div>
+        {/*Header part Start Here  */}
+        <div className="card-header d-flex justify-content-between align-content-center">
+          <div>
+            <h4>
+              {selectedCount === 0
+                ? `Gallery`
+                : `☑️ ${selectedCount} Files Selected`}
+            </h4>
+          </div>
+          <div>
+            <button onClick={handleDeleteSelected} className="btn btn-danger">
+              Delete Files
+            </button>
+          </div>
+        </div>
+        {/*Header part Start Here  */}
+
         <div className="gallery ">
           <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext
@@ -92,7 +98,6 @@ const Gallery = () => {
               {items.map((item) => (
                 <div key={item.id} className="item border-1 ">
                   <SortableItem
-                   
                     src={item.src}
                     selected={selectedItems.has(item.id)}
                     onToggle={() => handleCheckboxChange(item.id)}
